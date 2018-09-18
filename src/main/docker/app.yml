@@ -1,0 +1,16 @@
+version: '2'
+services:
+    travelsample-app:
+        image: travelsample
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_COUCHBASE_BOOTSTRAP_HOSTS=travelsample-couchbase
+            - SPRING_COUCHBASE_BUCKET_NAME=travelSample
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    travelsample-couchbase:
+        extends:
+            file: couchbase.yml
+            service: travelsample-couchbase
